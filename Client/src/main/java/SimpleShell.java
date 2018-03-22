@@ -76,14 +76,15 @@ public class SimpleShell {
                     continue;
                 }
                 if (list.get(0).equals("send")){
-                    if (list.get(1).equals("to")){
+                    if (list.get(2).equals("to")){
                         ObjectMapper mapper = new ObjectMapper();
-                        String friend = list.get(2);
+                        String friend = list.get(3);
                         String message = "";
-                        for (int i = 3; i < list.size(); i++){
+                        for (int i = 4; i < list.size(); i++){
                             message += list.get(i) + " ";
                         }
-                        Message sendMessage = new Message("wulawrence", friend, message);
+                        String fromId = list.get(1);
+                        Message sendMessage = new Message(fromId, friend, message);
                         String messageload = mapper.writeValueAsString(sendMessage);
                         String results = webber.postMessage(messageload);
                         SimpleShell.prettyPrint(results);
@@ -91,27 +92,17 @@ public class SimpleShell {
                     else {
                         ObjectMapper mapper = new ObjectMapper();
                         String message = "";
-                        for (int i = 1; i < list.size(); i++) {
+                        for (int i = 2; i < list.size(); i++) {
                             message += list.get(i) + " ";
                         }
-                        Message messages = new Message("wulawrence", "", message);
+                        String fromId = list.get(1);
+                        Message messages = new Message(fromId, "", message);
                         String messageload = mapper.writeValueAsString(messages);
                         String results = webber.postMessage(messageload);
                         SimpleShell.prettyPrint(results);
                     }
                 }
-//                if (list.get(1).equals("to")){
-//                    ObjectMapper mapper = new ObjectMapper();
-//                    String friend = list.get(2);
-//                    String message = "";
-//                    for (int i = 3; i < list.size(); i++){
-//                        message += list.get(i) + " ";
-//                    }
-//                    Message sendMessage = new Message("wulawrence", friend, message);
-//                    String messageload = mapper.writeValueAsString(sendMessage);
-//                    String results = webber.postMessage(messageload);
-//                    SimpleShell.prettyPrint(results);
-//                }
+
                 // you need to add a bunch more.
 
                 //!! command returns the last command in history
