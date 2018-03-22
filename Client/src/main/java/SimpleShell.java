@@ -29,7 +29,7 @@ public class SimpleShell {
         //we break out with <ctrl c>
         while (true) {
             //read what the user enters
-            System.out.println("cmd? ");
+            System.out.println("cmd?");
             commandLine = console.readLine();
 
             //input parsed into array of strings(command and arguments)
@@ -75,6 +75,43 @@ public class SimpleShell {
                     SimpleShell.prettyPrint(results);
                     continue;
                 }
+                if (list.get(0).equals("send")){
+                    if (list.get(1).equals("to")){
+                        ObjectMapper mapper = new ObjectMapper();
+                        String friend = list.get(2);
+                        String message = "";
+                        for (int i = 3; i < list.size(); i++){
+                            message += list.get(i) + " ";
+                        }
+                        Message sendMessage = new Message("wulawrence", friend, message);
+                        String messageload = mapper.writeValueAsString(sendMessage);
+                        String results = webber.postMessage(messageload);
+                        SimpleShell.prettyPrint(results);
+                    }
+                    else {
+                        ObjectMapper mapper = new ObjectMapper();
+                        String message = "";
+                        for (int i = 1; i < list.size(); i++) {
+                            message += list.get(i) + " ";
+                        }
+                        Message messages = new Message("wulawrence", "", message);
+                        String messageload = mapper.writeValueAsString(messages);
+                        String results = webber.postMessage(messageload);
+                        SimpleShell.prettyPrint(results);
+                    }
+                }
+//                if (list.get(1).equals("to")){
+//                    ObjectMapper mapper = new ObjectMapper();
+//                    String friend = list.get(2);
+//                    String message = "";
+//                    for (int i = 3; i < list.size(); i++){
+//                        message += list.get(i) + " ";
+//                    }
+//                    Message sendMessage = new Message("wulawrence", friend, message);
+//                    String messageload = mapper.writeValueAsString(sendMessage);
+//                    String results = webber.postMessage(messageload);
+//                    SimpleShell.prettyPrint(results);
+//                }
                 // you need to add a bunch more.
 
                 //!! command returns the last command in history
