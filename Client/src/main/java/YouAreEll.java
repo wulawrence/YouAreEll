@@ -35,6 +35,9 @@ public class YouAreEll {
         if (method.equalsIgnoreCase("put")){
 
         }
+        if (method.equalsIgnoreCase("post")){
+
+        }
         return "nada";
     }
 }
