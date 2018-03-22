@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
@@ -8,9 +10,11 @@ import java.util.List;
 public class SimpleShell {
 
 
-    public static void prettyPrint(String output) {
+    public static void prettyPrint(String output) throws IOException {
         // yep, make an effort to format things nicely, eh?
-        System.out.println(output);
+        ObjectMapper objectMapper = new ObjectMapper();
+        Object json = objectMapper.readValue(output, Object.class);
+        System.out.println(objectMapper.writerWithDefaultPrettyPrinter().writeValueAsString(json));
     }
     public static void main(String[] args) throws java.io.IOException {
 

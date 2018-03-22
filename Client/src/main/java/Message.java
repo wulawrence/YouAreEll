@@ -12,7 +12,11 @@ public class Message {
         this.toId = toId;
         this.message = message;
     }
-
+    public Message(String fromId, String toId, String message){
+        this.fromId = fromId;
+        this.toId = toId;
+        this.message = message;
+    }
     public String getSequence() {
         return sequence;
     }

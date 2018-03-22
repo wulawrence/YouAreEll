@@ -9,7 +9,10 @@ public class UserId {
         this.name = name;
         this.gitHub = gitHub;
     }
-
+    public UserId(String name, String gitHub){
+        this.name = name;
+        this.gitHub = gitHub;
+    }
     public String getUserId() {
         return userId;
     }
